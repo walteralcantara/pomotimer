@@ -1,0 +1,10 @@
+.footer {
+  margin-top: 5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.footer a {
+  font-weight: 700;
+  color: var(--quaternary-color);
+}

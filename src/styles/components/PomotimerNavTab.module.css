@@ -1,0 +1,52 @@
+.pomoTimerNavTabContainer {
+  color: #fff;
+
+  margin: 0 auto;
+
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+
+  margin-top: 6rem;
+  margin-bottom: -5rem;
+}
+
+.pomoTimerNavBox {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex: 1;
+
+  list-style: none;
+  font-size: 1rem;
+
+  z-index: -1;
+}
+
+.pomoTimerNavBox li + li {
+  margin-left: 1rem;
+}
+
+.pomoTimerNavBox li {
+  background: var(--secondary-color);
+
+  padding: 1rem;
+
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  transition: 0.3s ease;
+}
+
+.pomoTimerNavBox li:hover {
+  background: var(--quaternary-color);
+  font-weight: 700;
+}
+
+.pomoTimerNavBox li a {
+  cursor: pointer;
+}
