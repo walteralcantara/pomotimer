@@ -8,14 +8,18 @@ import { PomotimerBox } from './components/PomotimerBox';
 import { PomotimerNavTab } from './components/PomotimerNavTab';
 import { Footer } from './components/Footer';
 
+import { CountdownProvider } from '../src/context/CountdownContext';
+
 ReactDOM.render(
   <React.StrictMode>
     <Header />
 
-    <div>
-      <PomotimerNavTab />
-      <PomotimerBox />
-    </div>
+    <CountdownProvider>
+      <div>
+        <PomotimerNavTab />
+        <PomotimerBox />
+      </div>
+    </CountdownProvider>
 
     <Footer />
   </React.StrictMode>,

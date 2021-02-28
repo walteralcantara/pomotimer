@@ -1,30 +1,19 @@
-import React from 'react';
+import { useContext } from 'react';
 import styles from '../styles/components/PomotimerBox.module.css';
 
+import { CountdownContext } from '../context/CountdownContext';
+
 export const PomotimerBox = () => {
-  const [time, setTime] = React.useState(0.05 * 60);
-  const [isActive, setIsActive] = React.useState(false);
-
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  let timer = 0;
-
-  function startTimer() {
-    setIsActive(true);
-  }
-
-  React.useEffect(() => {
-    if (isActive && time > 0) {
-      timer = setTimeout(() => {
-        setTime(time - 1);
-      }, 1000);
-    }
-  }, [isActive, time]);
-
-  function pauseTimer() {
-    setIsActive(false);
-    clearTimeout(timer);
-  }
+  const {
+    time,
+    setTime,
+    minutes,
+    seconds,
+    isActive,
+    setIsActive,
+    startTimer,
+    pauseTimer,
+  } = useContext(CountdownContext);
 
   return (
     <div className={styles.pomoTimerBoxContainer}>
