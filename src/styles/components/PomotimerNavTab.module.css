@@ -50,3 +50,7 @@
 .pomoTimerNavBox li a {
   cursor: pointer;
 }
+
+.selected {
+  background: var(--quaternary-color) !important;
+}

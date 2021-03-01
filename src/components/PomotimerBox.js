@@ -13,6 +13,7 @@ export const PomotimerBox = () => {
     setIsActive,
     startTimer,
     pauseTimer,
+    round,
   } = useContext(CountdownContext);
 
   return (
@@ -33,6 +34,8 @@ export const PomotimerBox = () => {
           Pausar
         </button>
       )}
+
+      <p className={styles.roundDisplay}>Turno: {round}</p>
     </div>
   );
 };

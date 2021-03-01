@@ -5,7 +5,7 @@ export const CountdownContext = createContext();
 export function CountdownProvider({ children }) {
   const [time, setTime] = useState(0.05 * 60);
   const [isActive, setIsActive] = useState(false);
-  const [hasFinished, setHasFinished] = useState(false);
+  const [round, setRound] = useState(0);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -17,23 +17,21 @@ export function CountdownProvider({ children }) {
 
   function pauseTimer() {
     setIsActive(false);
-    setHasFinished(false);
     clearTimeout(timeoutTimer);
   }
 
   function resetPomo() {
     clearTimeout(timeoutTimer);
     setIsActive(false);
-    setHasFinished(false);
-    setTime(25 * 60);
+    setTime(0.05 * 60);
   }
 
   function pausePomo() {
-    alert('pausou');
+    setTime(5 * 60);
   }
 
   function longPausePomo() {
-    alert('pausou bastante');
+    setTime(15 * 60);
   }
 
   useEffect(() => {
@@ -41,6 +39,10 @@ export function CountdownProvider({ children }) {
       timeoutTimer = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    }
+
+    if (time === 0) {
+      setRound(round + 1);
     }
   }, [isActive, time]);
 
@@ -59,6 +61,7 @@ export function CountdownProvider({ children }) {
         resetPomo,
         pausePomo,
         longPausePomo,
+        round,
       }}
     >
       {children}
