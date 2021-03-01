@@ -5,7 +5,11 @@ export const CountdownContext = createContext();
 export function CountdownProvider({ children }) {
   const [time, setTime] = useState(0.05 * 60);
   const [isActive, setIsActive] = useState(false);
-  const [hasFinished, setHasFinished] = useState(false);
+  const [round, setRound] = useState(0);
+
+  const [isPomoSelected, setIsPomoSelected] = useState(true);
+  const [isShortBreakSelected, setIsShortBreakSelected] = useState(null);
+  const [isLongBreakSelected, setIsLongBreakSelected] = useState(null);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -17,23 +21,37 @@ export function CountdownProvider({ children }) {
 
   function pauseTimer() {
     setIsActive(false);
-    setHasFinished(false);
     clearTimeout(timeoutTimer);
   }
 
   function resetPomo() {
     clearTimeout(timeoutTimer);
     setIsActive(false);
-    setHasFinished(false);
-    setTime(25 * 60);
+    setTime(0.05 * 60);
+
+    setIsPomoSelected(true);
+    setIsShortBreakSelected(false);
+    setIsLongBreakSelected(false);
   }
 
   function pausePomo() {
-    alert('pausou');
+    clearTimeout(timeoutTimer);
+    setIsActive(false);
+    setTime(0.05 * 60);
+
+    setIsPomoSelected(false);
+    setIsShortBreakSelected(true);
+    setIsLongBreakSelected(false);
   }
 
   function longPausePomo() {
-    alert('pausou bastante');
+    clearTimeout(timeoutTimer);
+    setIsActive(false);
+    setTime(0.05 * 60);
+
+    setIsPomoSelected(false);
+    setIsShortBreakSelected(false);
+    setIsLongBreakSelected(true);
   }
 
   useEffect(() => {
@@ -41,6 +59,24 @@ export function CountdownProvider({ children }) {
       timeoutTimer = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    }
+
+    if (time === 0 && isPomoSelected && round < 4) {
+      setRound(round + 1);
+      pausePomo();
+    }
+
+    if (time > 0 && round === 4) {
+      setRound(0);
+      longPausePomo();
+    }
+
+    if (time === 0 && isShortBreakSelected) {
+      resetPomo();
+    }
+
+    if (time === 0 && isLongBreakSelected) {
+      resetPomo();
     }
   }, [isActive, time]);
 
@@ -59,6 +95,10 @@ export function CountdownProvider({ children }) {
         resetPomo,
         pausePomo,
         longPausePomo,
+        round,
+        isPomoSelected,
+        isShortBreakSelected,
+        isLongBreakSelected,
       }}
     >
       {children}
