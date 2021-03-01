@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 export const CountdownContext = createContext();
 
 export function CountdownProvider({ children }) {
-  const [time, setTime] = useState(0.05 * 60);
+  const [time, setTime] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [round, setRound] = useState(0);
 
@@ -27,7 +27,7 @@ export function CountdownProvider({ children }) {
   function resetPomo() {
     clearTimeout(timeoutTimer);
     setIsActive(false);
-    setTime(0.05 * 60);
+    setTime(25 * 60);
 
     setIsPomoSelected(true);
     setIsShortBreakSelected(false);
@@ -37,7 +37,7 @@ export function CountdownProvider({ children }) {
   function pausePomo() {
     clearTimeout(timeoutTimer);
     setIsActive(false);
-    setTime(0.05 * 60);
+    setTime(5 * 60);
 
     setIsPomoSelected(false);
     setIsShortBreakSelected(true);
@@ -47,7 +47,7 @@ export function CountdownProvider({ children }) {
   function longPausePomo() {
     clearTimeout(timeoutTimer);
     setIsActive(false);
-    setTime(0.05 * 60);
+    setTime(15 * 60);
 
     setIsPomoSelected(false);
     setIsShortBreakSelected(false);
