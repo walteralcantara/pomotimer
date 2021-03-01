@@ -7,6 +7,10 @@ export function CountdownProvider({ children }) {
   const [isActive, setIsActive] = useState(false);
   const [round, setRound] = useState(0);
 
+  const [isPomoSelected, setIsPomoSelected] = useState(true);
+  const [isShortBreakSelected, setIsShortBreakSelected] = useState(null);
+  const [isLongBreakSelected, setIsLongBreakSelected] = useState(null);
+
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   let timeoutTimer;
@@ -24,14 +28,30 @@ export function CountdownProvider({ children }) {
     clearTimeout(timeoutTimer);
     setIsActive(false);
     setTime(0.05 * 60);
+
+    setIsPomoSelected(true);
+    setIsShortBreakSelected(false);
+    setIsLongBreakSelected(false);
   }
 
   function pausePomo() {
-    setTime(5 * 60);
+    clearTimeout(timeoutTimer);
+    setIsActive(false);
+    setTime(0.05 * 60);
+
+    setIsPomoSelected(false);
+    setIsShortBreakSelected(true);
+    setIsLongBreakSelected(false);
   }
 
   function longPausePomo() {
-    setTime(15 * 60);
+    clearTimeout(timeoutTimer);
+    setIsActive(false);
+    setTime(0.05 * 60);
+
+    setIsPomoSelected(false);
+    setIsShortBreakSelected(false);
+    setIsLongBreakSelected(true);
   }
 
   useEffect(() => {
@@ -41,8 +61,22 @@ export function CountdownProvider({ children }) {
       }, 1000);
     }
 
-    if (time === 0) {
+    if (time === 0 && isPomoSelected && round < 4) {
       setRound(round + 1);
+      pausePomo();
+    }
+
+    if (time > 0 && round === 4) {
+      setRound(0);
+      longPausePomo();
+    }
+
+    if (time === 0 && isShortBreakSelected) {
+      resetPomo();
+    }
+
+    if (time === 0 && isLongBreakSelected) {
+      resetPomo();
     }
   }, [isActive, time]);
 
@@ -62,6 +96,9 @@ export function CountdownProvider({ children }) {
         pausePomo,
         longPausePomo,
         round,
+        isPomoSelected,
+        isShortBreakSelected,
+        isLongBreakSelected,
       }}
     >
       {children}
