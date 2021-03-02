@@ -11,15 +11,20 @@ export function CountdownProvider({ children }) {
   const [isShortBreakSelected, setIsShortBreakSelected] = useState(null);
   const [isLongBreakSelected, setIsLongBreakSelected] = useState(null);
 
+  const audioBtn = new Audio('/media/audioBtnClicked.mp3');
+  const audioAlarm = new Audio('./media/audioAlarmClock.mp3');
+
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   let timeoutTimer;
 
   function startTimer() {
+    audioBtn.play();
     setIsActive(true);
   }
 
   function pauseTimer() {
+    audioBtn.play();
     setIsActive(false);
     clearTimeout(timeoutTimer);
   }
@@ -59,6 +64,10 @@ export function CountdownProvider({ children }) {
       timeoutTimer = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    }
+
+    if (time === 0) {
+      audioAlarm.play();
     }
 
     if (time === 0 && isPomoSelected && round < 4) {
