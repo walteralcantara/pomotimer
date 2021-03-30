@@ -7,9 +7,10 @@
 </br>
 
 ### Demonstration
+https://pomoreact.vercel.app
 
-<img src="./assets/demo-1.gif" alt="demo">
-<img src="./assets/demo-2.gif" alt="demo">
+<img src="./assets/demo-1.gif" alt="demo" width="450">
+<img src="./assets/demo-2.gif" alt="demo" width="450">
 
 ### 🛠 Technologies
 
