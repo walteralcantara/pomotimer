@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from '../styles/components/Header.module.css';
+import '../styles/components/Header.scss';
 
 export const Header = () => {
   return (
     <header>
-      <div className={styles.logo} href="index.html">
-        <a href="index.html">
+      <div className="logo">
+        <a href="/">
           Pomo<span>.react</span>
         </a>
       </div>

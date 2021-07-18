@@ -1,0 +1,22 @@
+.logo {
+  margin-top: 1rem;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  font-size: 2rem;
+
+  a > span {
+    font-weight: 700;
+    color: var(--tertiary-color);
+  }
+
+  &:after {
+    content: '';
+    margin: 0 auto;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 30%;
+    width: 60%;
+    height: 1px;
+  }
+}

@@ -1,7 +1,12 @@
 import { useContext } from 'react';
-import styles from '../styles/components/PomotimerBox.module.css';
+import { Helmet } from 'react-helmet';
 
 import { CountdownContext } from '../context/CountdownContext';
+
+import { formatMinutes } from '../utils/formatMinutes';
+import { formatSeconds } from '../utils/formatSeconds';
+
+import '../styles/components/PomotimerBox.scss';
 
 export const PomotimerBox = () => {
   const {
@@ -11,28 +16,37 @@ export const PomotimerBox = () => {
     startTimer,
     pauseTimer,
     round,
+    isPomoSelected
   } = useContext(CountdownContext);
 
   return (
-    <div className={styles.pomoTimerBoxContainer}>
-      <div className={styles.pomoTimerDisplay}>
-        {minutes < 10 ? `${'0' + minutes}` : minutes}:
-        {seconds < 10 ? `${'0' + seconds}` : seconds}
-      </div>
+    <>
+      <Helmet>
+        <title>
+          {` ${formatMinutes(minutes)}:${formatSeconds(seconds)}
+           -  ${isPomoSelected ? `Pomo` : `Pausa`}`}
+        </title>
+      </Helmet>
 
-      {isActive === false && (
-        <button onClick={startTimer} className={styles.pomoButton}>
-          Iniciar
-        </button>
-      )}
+      <section>
+        <h1>
+          {formatMinutes(minutes)}
+          :
+          {formatSeconds(seconds)}
+        </h1>
 
-      {isActive === true && (
-        <button onClick={pauseTimer} className={styles.pomoButton}>
-          Pausar
-        </button>
-      )}
+        {isActive ? (
+          <button onClick={pauseTimer}>
+            Pausar
+          </button>
+        ) : (
+          <button onClick={startTimer}>
+            Iniciar
+          </button>
+        )}
 
-      <p className={styles.roundDisplay}>Turno: {round}</p>
-    </div>
+        <p>Turno: {round}</p>
+      </section>
+    </>
   );
 };

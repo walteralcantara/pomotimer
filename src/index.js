@@ -1,27 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './styles/global.css';
+import './styles/global.scss';
 
-import { Header } from './components/Header';
-import { PomotimerBox } from './components/PomotimerBox';
-import { PomotimerNavTab } from './components/PomotimerNavTab';
-import { Footer } from './components/Footer';
-
-import { CountdownProvider } from '../src/context/CountdownContext';
+import App from './App';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Header />
-
-    <CountdownProvider>
-      <div>
-        <PomotimerNavTab />
-        <PomotimerBox />
-      </div>
-    </CountdownProvider>
-
-    <Footer />
-  </React.StrictMode>,
+  <App />,
   document.getElementById('root'),
 );

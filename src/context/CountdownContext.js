@@ -8,8 +8,8 @@ export function CountdownProvider({ children }) {
   const [round, setRound] = useState(0);
 
   const [isPomoSelected, setIsPomoSelected] = useState(true);
-  const [isShortBreakSelected, setIsShortBreakSelected] = useState(null);
-  const [isLongBreakSelected, setIsLongBreakSelected] = useState(null);
+  const [isShortBreakSelected, setIsShortBreakSelected] = useState(false);
+  const [isLongBreakSelected, setIsLongBreakSelected] = useState(false);
 
   const audioBtn = new Audio('/media/audioBtnClicked.mp3');
   const audioAlarm = new Audio('./media/audioAlarmClock.mp3');
